@@ -222,14 +222,14 @@ output "ec2_ip" {
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.15.4 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.0 |
 
-## Providers
-
-No providers.
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_network"></a> [network](https://github.com/israeldoamaral/terraform-vpc-aws.git) | github.com/israeldoamaral/terraform-vpc-aws | n/a |
+| <a name="module_network"></a> [network](#module\_network) | github.com/marcio-machado76/terraform_aws_vpc | n/a |
+| <a name="module_network"></a> [network](#module\_network) | github.com/marcio-machado76/terraform_aws_vpc | n/a |
 | <a name="module_network"></a> [network](#module\_network) | github.com/marcio-machado76/terraform_aws_vpc | n/a |
 
 ## Resources
