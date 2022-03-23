@@ -90,7 +90,7 @@ resource "null_resource" "ansible_provisioner" {
 }
 ```
 #
-<summary>variables.tf - Arquivo que contém as variáveis que o módulo irá utilizar e pode ter os valores alterados de acordo com a necessidade.</summary>
+<summary>variables.tf - Arquivo que contém os inputs para as variáveis que os módulos irão utilizar e que podem ter seus valores alterados de acordo com a sua necessidade.</summary>
 
 ```hcl
 variable "region" {
@@ -112,22 +112,38 @@ variable "count_available" {
 }
 
 variable "tag_vpc" {
-  description = "Tag Name da VPC"
+  description = "Tag name da VPC"
   type        = string
-  default     = "VPC-name"
+  default     = "Jenkins"
 }
 
-variable "tag_igw" {
-  description = "Tag Name do internet gateway"
-  type        = string
-  default     = "gw-name"
+variable "namespace" {
+  description = "Tag name da ssh-key"
+  type = string
+  default = "Jenkins"
+
 }
 
-variable "tag_rtable" {
-  description = "Tag Name das route tables"
-  type        = string
-  default     = "rt-name"
+variable "ami_id" {
+  description = "Nome da ami que sera usado para criar a ec2"
+  type = string
+  default = "ami-04505e74c0741db8d"
+  
 }
+
+variable "instance_type" {
+  description = "Tpo de instancia da AWS"
+  type = string
+  default = "t2.micro"
+}
+
+variable "tag_name" {
+  description = "Tag name da instancia EC2"
+  type = string
+  default = "Jenkins"
+  
+}
+
 
 variable "nacl" {
   description = "Regras de Network Acls AWS"
@@ -140,9 +156,18 @@ variable "nacl" {
   }
 }
 
+
+variable "sg-cidr" {
+  description = "Mapa de portas de serviços"
+  default = {
+    22   = { to_port = 22, description = "Entrada ssh", protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] }
+    8080 = { to_port = 8080, description = "Entrada custom para app", protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] }
+  }
+}
+
 ```
 #
-<summary>outputs.tf - Outputs de recursos que serão utilizados em outros módulos.</summary>
+<summary>outputs.tf - Disponibiliza informações sobre a infraestrutura na linha de comando e podem expor informações para outras configurações do Terraform usarem. Os valores de saída são semelhantes aos valores de retorno em linguagens de programação.</summary>
 
 ```hcl
 output "vpc" {
@@ -159,6 +184,34 @@ output "private_subnet" {
   description = "Subnet private "
   value       = module.network.private_subnet
 }
+
+
+output "security_Group" {
+  description = "Security Group"
+  value       = module.security_group.security_group_id
+}
+
+
+output "ssh_keypair" {
+  value = module.ssh-key.ssh_keypair
+  sensitive = true
+}
+
+
+output "key_name" {
+  value = module.ssh-key.key_name
+}
+
+output "IP_Jenkins" {
+  description = "Retorna o ip da instancia Jenkins"
+  value = format("%s:8080",module.ec2.public_ip)
+}
+
+output "ec2_ip" {
+  description = "Retorna o ip da instancia"
+  value = module.ec2.public_ip
+}
+
 
 ```
 
