@@ -246,7 +246,7 @@ output "ec2_ip" {
 | <a name="input_instance_type"></a> [count\_instance_type](#input\_instance_type) | Tipo de instancia da AWS | `string` | `t2.micro` | yes |
 | <a name="input_tag_name"></a> [count\_tag_name](#input\_tag_name) | Tag name da instancia EC2 | `string` | `Jenkins` | yes |
 | <a name="input_nacl"></a> [nacl](#input\_nacl) | Regras de Network Acls AWS | `map(object)` | `"ver no arquivo"` | yes |
-| <a name="input_sg-cidr"></a> [tag\_sg-cidr](#input\_sg-cidr) | Mapa de portas de acesso | `map(object)` | `"ver no arquivo"` | yes |
+| <a name="input_sg-cidr"></a> [tag\_sg-cidr](#input\_sg-cidr) | Mapa de portas de acesso | `map(object)` | `22   = { to_port = 22, description = "Entrada ssh", protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] }` | yes |
 
 
 ## Outputs

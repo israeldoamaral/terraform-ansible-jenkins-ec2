@@ -37,7 +37,7 @@ variable "ami_id" {
 }
 
 variable "instance_type" {
-  description = "Tpo de instancia da AWS"
+  description = "Tipo de instancia da AWS"
   type = string
   default = "t2.micro"
 }
