@@ -17,9 +17,36 @@ variable "count_available" {
 }
 
 variable "tag_vpc" {
-  description = "Tag Name da VPC"
+  description = "Tag name da VPC"
   type        = string
   default     = "Jenkins"
+}
+
+variable "namespace" {
+  description = "Tag name da ssh-key"
+  type = string
+  default = "Jenkins"
+
+}
+
+variable "ami_id" {
+  description = "Nome da ami que sera usado para criar a ec2"
+  type = string
+  default = "ami-04505e74c0741db8d"
+  
+}
+
+variable "instance_type" {
+  description = "Tpo de instancia da AWS"
+  type = string
+  default = "t2.micro"
+}
+
+variable "tag_name" {
+  description = "Tag name da instancia EC2"
+  type = string
+  default = "Jenkins"
+  
 }
 
 
