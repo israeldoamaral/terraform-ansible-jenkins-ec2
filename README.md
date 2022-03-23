@@ -237,14 +237,17 @@ output "ec2_ip" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_region"></a> [region](#input\_region) | Região na AWS para a infraestrutura | `string` | `us-east-1` | no |
-| <a name="input_cidr"></a> [cidr](#input\_cidr) | Bloco de rede para a VPC | `string` | `10.10.0.0/16` | no |
-| <a name="input_count_available"></a> [count\_available](#input\_count\_available) | Numero de Zonas de disponibilidade | `number` | `2` | no |
-| <a name="input_nacl"></a> [nacl](#input\_nacl) | Regras de Network Acls AWS | `map(object)` | n/a | yes |
-| <a name="input_region"></a> [region](#input\_region) | Região na AWS, exemplo "us-east-1" | `string` | `" "` | no |
-| <a name="input_tag_igw"></a> [tag\_igw](#input\_tag\_igw) | Tag Name do internet gateway | `string` | `""` | no |
-| <a name="input_tag_rtable"></a> [tag\_rtable](#input\_tag\_rtable) | Tag Name das route tables | `string` | `""` | no |
-| <a name="input_tag_vpc"></a> [tag\_vpc](#input\_tag\_vpc) | Tag Name da VPC | `string` | `""` | no |
+| <a name="input_region"></a> [region](#input\_region) | Região na AWS para a infraestrutura | `string` | `us-east-1` | yes |
+| <a name="input_cidr"></a> [cidr](#input\_cidr) | Bloco de rede para a VPC | `string` | `10.10.0.0/16` | yes |
+| <a name="input_count_available"></a> [count\_available](#input\_count\_available) | Numero de Zonas de disponibilidade | `number` | `2` | yes |
+| <a name="input_tag_vpc"></a> [count\_tag_vpc](#input\_tag_vpc) | Tag name da VPC | `string` | `Jenkins` | yes |
+| <a name="input_namespace"></a> [count\_namespace](#input\_namespace) | Tag name da ssh-key | `string` | `Jenkins` | yes |
+| <a name="input_ami_id"></a> [count\_ami_id](#input\_ami_id) | Nome da ami que sera usado para criar a ec2 | `string` | `ami-04505e74c0741db8d` | yes |
+| <a name="input_instance_type"></a> [count\_instance_type](#input\_instance_type) | Tipo de instancia da AWS | `string` | `t2.micro` | yes |
+| <a name="input_tag_name"></a> [count\_tag_name](#input\_tag_name) | Tag name da instancia EC2 | `string` | `Jenkins` | yes |
+| <a name="input_nacl"></a> [nacl](#input\_nacl) | Regras de Network Acls AWS | `map(object)` | `"ver no arquivo"` | yes |
+| <a name="input_sg-cidr"></a> [tag\_sg-cidr](#input\_sg-cidr) | Mapa de portas de acesso | `string` | `"ver no arquivo"` | yes |
+
 
 ## Outputs
 
