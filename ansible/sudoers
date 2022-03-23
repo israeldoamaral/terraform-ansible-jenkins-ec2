@@ -1,0 +1,4 @@
+sudo vim /etc/sudoers.d/israel
+
+israel ALL=(ALL) NOPASSWD: ALL
+

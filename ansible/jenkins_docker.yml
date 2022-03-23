@@ -1,0 +1,68 @@
+---
+- hosts: all
+  become: true
+  remote_user: ubuntu
+  become_user: root
+  gather_facts: no
+  tasks:
+    # - name: Aguardando servidor
+    #   wait_for_connection:
+    #     delay: 30
+    #     timeout: 90
+        
+
+    - name: Update apt
+      remote_user: ubuntu
+      apt:
+        update_cache: yes
+
+    - name: Instalando docker
+      remote_user: ubuntu
+      apt:
+        name: ['docker.io', 'docker-compose']
+        state: present
+
+    - name: Adicionando usuario ubuntu no grupo docker
+      remote_user: ubuntu
+      user:
+        name: "ubuntu"
+        group: "docker"
+        append: yes
+      tags:
+        - docker
+
+    - name: Instalando Java para usar o Ansible
+      become: yes
+      apt:
+        name: "{{ packages }}"
+        # state: present
+      vars:
+        packages:
+         - openjdk-11-jdk
+
+
+    - name: certificando-se de que a chave do repositorio apt do jenkins esteja instalada
+      apt_key: url=https://pkg.jenkins.io/debian-stable/jenkins.io.key state=present
+
+
+    - name: verifique se o repositorio está configurado
+      apt_repository: repo='deb https://pkg.jenkins.io/debian-stable binary/' state=present
+
+
+    - name: verificando se o jenkins está instalado
+      apt: name=jenkins update_cache=yes
+
+
+    - name: verificando se o Jenkins está em execucao
+      service: name=jenkins state=started
+    
+    - name: Aguardando o Arquivo de Senha do Jenkins ser criado
+      wait_for:
+        path: /var/lib/jenkins/secrets/initialAdminPassword
+
+    - name: Grava o Password inicial do Jenkins na sua maquina local
+      fetch:
+        src: /var/lib/jenkins/secrets/initialAdminPassword
+        dest: ../JenkinsPassword
+        flat: yes
+      become: true
