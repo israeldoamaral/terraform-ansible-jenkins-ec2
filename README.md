@@ -237,7 +237,8 @@ output "ec2_ip" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_region"></a> [region](#input\_region) | Região na AWS para a infraestrutura | `string` | `"us-east-1"` | no |
+| <a name="input_region"></a> [region](#input\_region) | Região na AWS para a infraestrutura | `string` | `us-east-1` | no |
+| <a name="input_cidr"></a> [cidr](#input\_cidr) | Bloco de rede para a VPC | `string` | `10.10.0.0/16` | no |
 | <a name="input_count_available"></a> [count\_available](#input\_count\_available) | Numero de Zonas de disponibilidade | `number` | `2` | no |
 | <a name="input_nacl"></a> [nacl](#input\_nacl) | Regras de Network Acls AWS | `map(object)` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | Região na AWS, exemplo "us-east-1" | `string` | `" "` | no |
