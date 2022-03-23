@@ -1,4 +1,4 @@
-# terraform_ansible_jenkins_ec2
+# Terraform + Annsible + Jenkins + EC2
 - [x] Status:  Ainda em desenvolvimento.
 ###
 ### O Projeto utiliza Terraform para criar na AWS os recursos: Vpc, subnets(publicas e privadas), network Acls, route tables, internet gateway, security group, ec2, key-pair.
