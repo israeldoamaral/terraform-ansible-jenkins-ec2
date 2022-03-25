@@ -21,7 +21,7 @@ output "security_Group" {
 
 
 output "ssh_keypair" {
-  value = module.ssh-key.ssh_keypair
+  value     = module.ssh-key.ssh_keypair
   sensitive = true
 }
 
@@ -32,10 +32,10 @@ output "key_name" {
 
 output "IP_Jenkins" {
   description = "Retorna o ip da instancia Jenkins"
-  value = format("%s:8080",module.ec2.public_ip)
+  value       = format("%s:8080", module.ec2.public_ip)
 }
 
 output "ec2_ip" {
   description = "Retorna o ip da instancia"
-  value = module.ec2.public_ip
+  value       = module.ec2.public_ip
 }

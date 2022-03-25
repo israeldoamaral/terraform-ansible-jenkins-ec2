@@ -52,11 +52,14 @@ module "ec2" {
 
 resource "null_resource" "ansible_provisioner" {
   triggers = {
-    public_ip = module.ec2.public_ip
+    id = module.ec2.id
   }
 
   provisioner "local-exec" {
-    command = "ansible-playbook -u ubuntu -i '${module.ec2.public_ip},' --private-key ${module.ssh-key.key_name}.pem ansible/jenkins_docker.yml '--ssh-common-args=-o StrictHostKeyChecking=no'"
+    command = <<EOT
+    sleep 60; ansible-playbook -u ubuntu -i '${module.ec2.public_ip},' --private-key ${module.ssh-key.key_name}.pem ansible/jenkins_docker.yml \
+    '--ssh-common-args=-o StrictHostKeyChecking=no' 
+  EOT
   }
 
   depends_on = [
