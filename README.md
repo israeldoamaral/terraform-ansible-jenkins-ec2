@@ -274,6 +274,7 @@ output "ec2_ip" {
 | <a name="input_instance_type"></a> [count\_instance_type](#input\_instance_type) | Tipo de instancia da AWS | `string` | `t2.micro` | yes |
 | <a name="input_tag_name"></a> [count\_tag_name](#input\_tag_name) | Tag name da instancia EC2 | `string` | `Jenkins` | yes |
 | <a name="input_nacl"></a> [nacl](#input\_nacl) | Regras de Network Acls AWS | `map(object)` | `"ver no arquivo"` | yes |
+| <a name="input_tag-sg"></a> [tag-sg](#input\_tag-sg) | Tag name do Security Group | `string` | `"Jenkins"` | yes |
 | <a name="input_sg-cidr"></a> [tag\_sg-cidr](#input\_sg-cidr) | Mapa de portas de acesso | `map(object)` | `22   = { to_port = 22, description = "Entrada ssh", protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] }` | yes |
 
 
@@ -282,16 +283,14 @@ output "ec2_ip" {
 No outputs.
 #
 ## Como usar.
-  - Para utilizar localmente crie os arquivos descritos no começo deste tutorial, main.tf, versions.tf, variables.tf e outputs.tf.
-  - Após criar os arquivos, atente-se aos valores default das variáveis, pois podem ser alterados de acordo com sua necessidade. 
-  - A variável `count_available` define o quantidade de zonas de disponibilidade, públicas e privadas que seram criadas nessa Vpc.
+  - Para utilizar clone o repositório em seu computador.
+  - Após o projeto ser clonado, atente-se aos valores default das variáveis, pois podem ser alterados de acordo com sua necessidade. 
+  - A variável `count_available` define o quantidade de zonas de disponibilidade, públicas e privadas que serão criadas nessa Vpc.
   - Certifique-se que possua as credenciais da AWS - **`AWS_ACCESS_KEY_ID`** e **`AWS_SECRET_ACCESS_KEY`**.
 
 ### Comandos
-Para consumir os módulos deste repositório é necessário ter o terraform instalado ou utilizar o container do terraform dentro da pasta do seu projeto da seguinte forma:
-
-* `docker run -it --rm -v $PWD:/app -w /app --entrypoint "" hashicorp/terraform:light sh` 
-    
+Para consumir os módulos deste repositório é necessário ter o terraform e Ansible instalados.
+   
 Em seguida exporte as credenciais da AWS:
 
 * `export AWS_ACCESS_KEY_ID=sua_access_key_id`
