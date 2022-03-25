@@ -18,7 +18,7 @@ module "security_group" {
   source  = "git::https://github.com/israeldoamaral/terraform-sg-aws"
   vpc     = module.network.vpc
   sg-cidr = var.sg-cidr
-  tag-sg = "Jenkins"
+  tag-sg = var.tag-sg
 
 }
 

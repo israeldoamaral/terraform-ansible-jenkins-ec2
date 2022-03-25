@@ -90,79 +90,107 @@ resource "null_resource" "ansible_provisioner" {
 }
 ```
 #
-<summary>variables.tf - Arquivo que contém os inputs para as variáveis que os módulos irão utilizar e que podem ter seus valores alterados de acordo com a sua necessidade.</summary>
+<summary>variables.tf - Arquivo que contém os inputs para as variáveis que os módulos irão utilizar.</summary>
 
 ```hcl
 variable "region" {
-  type        = string
   description = "Região na AWS"
-  default     = "us-east-1"
+  type        = string
 }
 
 variable "cidr" {
   description = "CIDR da VPC"
   type        = string
-  default     = "10.10.0.0/16"
 }
 
 variable "count_available" {
   type        = number
   description = "Numero de Zonas de disponibilidade"
-  default     = 2
 }
 
 variable "tag_vpc" {
   description = "Tag name da VPC"
   type        = string
-  default     = "Jenkins"
 }
 
 variable "namespace" {
   description = "Tag name da ssh-key"
   type = string
-  default = "Jenkins"
-
 }
 
 variable "ami_id" {
   description = "Nome da ami que sera usado para criar a ec2"
-  type = string
-  default = "ami-04505e74c0741db8d"
-  
+  type = string 
 }
 
 variable "instance_type" {
   description = "Tpo de instancia da AWS"
   type = string
-  default = "t2.micro"
 }
 
 variable "tag_name" {
   description = "Tag name da instancia EC2"
   type = string
-  default = "Jenkins"
-  
 }
 
 
 variable "nacl" {
   description = "Regras de Network Acls AWS"
   type        = map(object({ protocol = string, action = string, cidr_blocks = string, from_port = number, to_port = number }))
-  default = {
-    100 = { protocol = "tcp", action = "allow", cidr_blocks = "0.0.0.0/0", from_port = 22, to_port = 22 }
-    105 = { protocol = "tcp", action = "allow", cidr_blocks = "0.0.0.0/0", from_port = 80, to_port = 80 }
-    110 = { protocol = "tcp", action = "allow", cidr_blocks = "0.0.0.0/0", from_port = 443, to_port = 443 }
-    150 = { protocol = "tcp", action = "allow", cidr_blocks = "0.0.0.0/0", from_port = 1024, to_port = 65535 }
-  }
 }
 
 
 variable "sg-cidr" {
   description = "Mapa de portas de serviços"
-  default = {
+  type        = map(any)
+}
+
+```
+#
+<summary>terraform.tfvars.tf - Arquivo que contém os valores enviados para as variáveis em "variables.tf" e que podem ter seus valores alterados de acordo com a sua necessidade.</summary>
+
+```hcl
+# Região na AWS
+region = "us-east-1"
+
+# CIDR da VPC
+cidr = "10.10.0.0/16"
+
+# Quantidade de subnets desejada
+count_available = 2
+
+# Tag name da VPC
+tag_vpc = "Jenkins"
+
+# Tag name da ssh-key
+namespace = "Jenkins"
+
+# Id da AMI que sera usado para criar a ec2
+ami_id = "ami-04505e74c0741db8d"
+
+# Tipo de instancia da AWS
+instance_type = "t2.micro"
+
+# Tag name da instancia EC2
+tag_name = "Jenkins"
+
+
+# Regras de Network Acls AWS
+nacl = {
+    100 = { protocol = "tcp", action = "allow", cidr_blocks = "0.0.0.0/0", from_port = 22, to_port = 22 }
+    105 = { protocol = "tcp", action = "allow", cidr_blocks = "0.0.0.0/0", from_port = 80, to_port = 80 }
+    110 = { protocol = "tcp", action = "allow", cidr_blocks = "0.0.0.0/0", from_port = 443, to_port = 443 }
+    150 = { protocol = "tcp", action = "allow", cidr_blocks = "0.0.0.0/0", from_port = 1024, to_port = 65535 }
+}
+
+
+# Tag name do Security Group
+tag-sg = "Jenkins"
+
+# Regras de acesso do security group
+sg-cidr = {
     22   = { to_port = 22, description = "Entrada ssh", protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] }
     8080 = { to_port = 8080, description = "Entrada custom para app", protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] }
-  }
 }
 
 ```
