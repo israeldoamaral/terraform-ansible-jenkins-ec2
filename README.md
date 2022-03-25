@@ -280,7 +280,8 @@ output "ec2_ip" {
 
 ## Outputs
 
-No outputs.
+![Alt text](images/output.png?raw=true "Title")
+
 #
 ## Como usar.
   - Para utilizar clone o repositório em seu computador.
