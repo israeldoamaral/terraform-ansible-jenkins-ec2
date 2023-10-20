@@ -42,15 +42,18 @@
 
 
     - name: certificando-se de que a chave do repositorio apt do jenkins esteja instalada
-      apt_key: url=https://pkg.jenkins.io/debian-stable/jenkins.io.key state=present
+      apt_key: url=https://pkg.jenkins.io/debian/jenkins.io-2023.key state=present
+      become: yes
 
 
     - name: verifique se o repositorio está configurado
       apt_repository: repo='deb https://pkg.jenkins.io/debian-stable binary/' state=present
+      become: yes
 
 
     - name: verificando se o jenkins está instalado
       apt: name=jenkins update_cache=yes
+      become: yes
 
 
     - name: verificando se o Jenkins está em execucao

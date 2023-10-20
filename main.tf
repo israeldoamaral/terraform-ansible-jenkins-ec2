@@ -35,7 +35,7 @@ module "ssh-key" {
 
 module "ec2" {
   source         = "git::https://github.com/israeldoamaral/terraform-ec2-aws"
-  ami_id         = var.ami_id
+  ami_id         = "ami-0fc5d935ebf8bc3bc"
   instance_type  = var.instance_type
   subnet_id      = module.network.public_subnet[0]
   security_group = module.security_group.security_group_id
