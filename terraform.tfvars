@@ -14,7 +14,7 @@ tag_vpc = "Jenkins"
 namespace = "Jenkins"
 
 # Id da AMI que sera usado para criar a ec2
-ami_id = "ami-04505e74c0741db8d"
+ami_id = "ami-0fc5d935ebf8bc3bc"
 
 # Tipo de instancia da AWS
 instance_type = "t2.micro"
